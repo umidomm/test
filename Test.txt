@@ -1,0 +1,609 @@
+{
+  "log": {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns-remote",
+        "address": "udp://1.1.1.1",
+        "address_resolver": "dns-direct"
+      },
+      {
+        "tag": "dns-trick-direct",
+        "address": "https://sky.rethinkdns.com/",
+        "detour": "direct-fragment"
+      },
+      {
+        "tag": "dns-direct",
+        "address": "1.1.1.1",
+        "address_resolver": "dns-local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-local",
+        "address": "local",
+        "detour": "direct"
+      },
+      {
+        "tag": "dns-block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "domain": [
+          "0",
+          "www.speedtest.net",
+          "flhy.techgap.ir",
+          "[2a01:4f9:c010:3955::1]",
+          "[2a01:4f8:1c1b:13c2::1]",
+          "ushy.techgap.ir"
+        ],
+        "server": "dns-direct"
+      },
+      {
+        "domain": "connectivitycheck.gstatic.com",
+        "server": "dns-remote",
+        "rewrite_ttl": 3000
+      },
+      {
+        "domain_suffix": ".ir",
+        "server": "dns-direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "server": "dns-direct"
+      }
+    ],
+    "final": "dns-remote",
+    "static_ips": {
+      "sky.rethinkdns.com": [
+        "104.17.148.22",
+        "104.17.147.22",
+        "188.114.96.2",
+        "188.114.97.2"
+      ]
+    },
+    "independent_cache": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 9000,
+      "inet4_address": "172.19.0.1/28",
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "gvisor",
+      "sniff": true,
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 12334,
+      "sniff": true,
+      "sniff_override_destination": true,
+      "domain_strategy": "ipv4_only"
+    },
+    {
+      "type": "direct",
+      "tag": "dns-in",
+      "listen": "127.0.0.1",
+      "listen_port": 16450
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "select",
+      "outbounds": [
+        "auto",
+        "👤test6436346⏳1.63 GB/50.0 GB📅26 DAYS",
+        "RT🇩🇪",
+        "WT🇩🇪",
+        "RT🇩🇪",
+        "HU🇫🇮",
+        "WS🇫🇮",
+        "HY🇫🇮",
+        "HY6🇫🇮",
+        "HU🇩🇪",
+        "WS🇩🇪",
+        "HY🇩🇪⚠️ Enable IP V6",
+        "TUN🇩🇪",
+        "HU🇺🇸",
+        "HY🇺🇸",
+        "WS🇺🇸",
+        "Rt",
+        "Test"
+      ],
+      "default": "auto",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "👤test6436346⏳1.63 GB/50.0 GB📅26 DAYS",
+        "RT🇩🇪",
+        "WT🇩🇪",
+        "RT🇩🇪",
+        "HU🇫🇮",
+        "WS🇫🇮",
+        "HY🇫🇮",
+        "HY6🇫🇮",
+        "HU🇩🇪",
+        "WS🇩🇪",
+        "HY🇩🇪⚠️ Enable IP V6",
+        "TUN🇩🇪",
+        "HU🇺🇸",
+        "HY🇺🇸",
+        "WS🇺🇸",
+        "Rt",
+        "Test"
+      ],
+      "url": "http://connectivitycheck.gstatic.com/generate_204",
+      "interval": "10m0s",
+      "tolerance": 1,
+      "idle_timeout": "30m0s",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "vmess",
+      "tag": "👤test6436346⏳1.63 GB/50.0 GB📅26 DAYS",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "0",
+      "server_port": 8080,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "security": "",
+      "transport": {
+        "type": "http",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "RT🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "188.245.62.175",
+      "server_port": 443,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "refersion.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "sW6qyXwm1mk-I-H0JJk6sscktj3ZxK5vWNzQVUUTUQs",
+          "short_id": "a56f71"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "WT🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "77.232.140.176",
+      "server_port": 2053,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "germani1.gsksgdjjshehdjdhjhehdjdjdh.shop",
+        "alpn": "http/1.1",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/hfjjdjebjdhdh",
+        "headers": {
+          "Host": "germani1.gsksgdjjshehdjdhjhehdjdjdh.shop",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "RT🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "188.245.62.175",
+      "server_port": 443,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "refersion.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "sW6qyXwm1mk-I-H0JJk6sscktj3ZxK5vWNzQVUUTUQs",
+          "short_id": "a56f71"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "HU🇫🇮",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "httpupgrade",
+        "host": "Job-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.GemClash.ShoP.",
+        "path": "/BusSpinningUploadEarshotSchematicPretenderPacifistEarthenVealPrisonBackdropSequelRetyingDecimalSmugglingResubmitCrustBacteriumAprilPromptlyClauseUnglueSecludedLadybugVisorDefrostSmogOvereagerVixenEnforcerRemarrySpottedDevoutlySarcasticUnknottedReclaimShowoffSuddenDawdlerRejoinZoningSeventyProvenAerosolCohesiveEmblazeAstrideHutPerfectlyThemeUnabashedSpiderQuarryOnionPangBarretteBoatDirectiveSwooshUpcomingTattle",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "WS🇫🇮",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "ws",
+        "path": "/ArmDefrostStoningPalpableCaliberSatchelReverendAgreementAppointeeBlandnessRackRetoldCleanPusherRemindfulGrabFoeTrimmerRaffleCameoEarshotopa4a32gp3df6veb3ro4cprwnkkocfr6vr8c379ficc6kari68xy6jp6of87fx9gwf9b6rbn4n3z8f7ys9vs6s6cjgybb6hxmg8xeq392vm2vjwhapfsnoyzaa9ovt9tSdkvHsQyygDqVHisbRfUWFkfgLqqaFCaipmvEipMbAZQHSdhNeVyDwdpLGQNYatnwJFwfHbvBQuGmuafxdWBXyJywaMeaWPBMfNSKtpKYJGXbNYfGRXrvpfnZgCQRZwhkLJNjEzdssjtEUzBxwjZivXgdiBzCWuvqWfBkvYFedgefbynLmkFpwdeULeDwzhmUDjnZwebJpmkhEUoupbvEiqSPAQyGfrvzWWDyiVbHivFeTiMHEoETXEvDSXpqjcm",
+        "headers": {
+          "Host": "Job-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.TechTap.IR.",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        },
+        "max_early_data": 2056,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HY🇫🇮",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "flhy.techgap.ir",
+      "server_port": 17134,
+      "obfs": {
+        "type": "salamander",
+        "password": "1DP9tJ251xLCYAIAnFW"
+      },
+      "password": "93bc7187eedb0381b1ae438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "flhy.techgap.ir"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HY6🇫🇮",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "[2a01:4f9:c010:3955::1]",
+      "server_port": 17134,
+      "obfs": {
+        "type": "salamander",
+        "password": "1DP9tJ251xLCYAIAnFW"
+      },
+      "password": "93bc7187eedb0381b1ae438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "flhy.techgap.ir"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "HU🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "httpupgrade",
+        "host": "xn--company.url.rubika.irwww.speedtest.net.GemClash.ShoP.",
+        "path": "/hup",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "WS🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "ws",
+        "path": "/ArmDefrostStoningPalpableCaliberSatchelReverendAgreementAppointeeBlandnessRackRetoldCleanPusherRemindfulGrabFoeTrimmerRaffleCameoEarshotopa4a32gp3df6veb3ro4cprwnkkocfr6vr8c379ficc6kari68xy6jp6of87fx9gwf9b6rbn4n3z8f7ys9vs6s6cjgybb6hxmg8xeq392vm2vjwhapfsnoyzaa9ovt9tSdkvHsQyygDqVHisbRfUWFkfgLqqaFCaipmvEipMbAZQHSdhNeVyDwdpLGQNYatnwJFwfHbvBQuGmuafxdWBXyJywaMeaWPBMfNSKtpKYJGXbNYfGRXrvpfnZgCQRZwhkLJNjEzdssjtEUzBxwjZivXgdiBzCWuvqWfBkvYFedgefbynLmkFpwdeULeDwzhmUDjnZwebJpmkhEUoupbvEiqSPAQyGfrvzWWDyiVbHivFeTiMHEoETXEvDSXpqjcm",
+        "headers": {
+          "Host": "sub-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.TechTap.IR.",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        },
+        "max_early_data": 2056,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HY🇩🇪⚠️ Enable IP V6",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "[2a01:4f8:1c1b:13c2::1]",
+      "server_port": 17132,
+      "obfs": {
+        "type": "salamander",
+        "password": "1DP9tJ251xLCYAIAnFW"
+      },
+      "password": "93bc7187eedb0381b1ae438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "Grhy.techgap.ir"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "TUN🇩🇪",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "194.31.194.230",
+      "server_port": 9090,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "http",
+        "host": "www.tebyan.net",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "HU🇺🇸",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "httpupgrade",
+        "host": "Usa-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.GemClash.ShoP.",
+        "path": "/BusSpinningUploadEarshotSchematicPretenderPacifistEarthenVealPrisonBackdropSequelRetyingDecimalSmugglingResubmitCrustBacteriumAprilPromptlyClauseUnglueSecludedLadybugVisorDefrostSmogOvereagerVixenEnforcerRemarrySpottedDevoutlySarcasticUnknottedReclaimShowoffSuddenDawdlerRejoinZoningSeventyProvenAerosolCohesiveEmblazeAstrideHutPerfectlyThemeUnabashedSpiderQuarryOnionPangBarretteBoatDirectiveSwooshUpcomingTattle",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "HY🇺🇸",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "Ushy.techgap.ir",
+      "server_port": 17135,
+      "obfs": {
+        "type": "salamander",
+        "password": "1DP9tJ251xLCYAIAnFW"
+      },
+      "password": "93bc7187eedb0381b1ae438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "Ushy.techgap.ir"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "WS🇺🇸",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "ws",
+        "path": "/ArmDefrostStoningPalpableCaliberSatchelReverendAgreementAppointeeBlandnessRackRetoldCleanPusherRemindfulGrabFoeTrimmerRaffleCameoEarshotopa4a32gp3df6veb3ro4cprwnkkocfr6vr8c379ficc6kari68xy6jp6of87fx9gwf9b6rbn4n3z8f7ys9vs6s6cjgybb6hxmg8xeq392vm2vjwhapfsnoyzaa9ovt9tSdkvHsQyygDqVHisbRfUWFkfgLqqaFCaipmvEipMbAZQHSdhNeVyDwdpLGQNYatnwJFwfHbvBQuGmuafxdWBXyJywaMeaWPBMfNSKtpKYJGXbNYfGRXrvpfnZgCQRZwhkLJNjEzdssjtEUzBxwjZivXgdiBzCWuvqWfBkvYFedgefbynLmkFpwdeULeDwzhmUDjnZwebJpmkhEUoupbvEiqSPAQyGfrvzWWDyiVbHivFeTiMHEoETXEvDSXpqjcm",
+        "headers": {
+          "Host": "Usa-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.TechGap.IR.",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        },
+        "max_early_data": 2056,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Rt",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "91.107.159.187",
+      "server_port": 443,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.speedtest.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "sW6qyXwm1mk-I-H0JJk6sscktj3ZxK5vWNzQVUUTUQs",
+          "short_id": "a56f71"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Test",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "0-0"
+      },
+      "server": "www.speedtest.net",
+      "server_port": 80,
+      "uuid": "93bc7187-eedb-0381-b1ae-438fadb25871",
+      "transport": {
+        "type": "httpupgrade",
+        "host": "Job-89ytdd0zy-rubika.ir.google.com.xn--cr8haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.xn--qeiaaaa55391eaaaaaaabaaeaaaaaaaaaaaaaaaaaaa.apaspeedtest.netrat.com.eu.com.shw814.ir.xn--cr8haaaaaaaaaaaaaaaa.xn--g28h.AirEacoNdicionadoMurcia.EU.Cf-iPfs.XyZ.",
+        "path": "/BusSpinningUploadEarshotSchematicPretenderPacifistEarthenVealPrisonBackdropSequelRetyingDecimalSmugglingResubmitCrustBacteriumAprilPromptlyClauseUnglueSecludedLadybugVisorDefrostSmogOvereagerVixenEnforcerRemarrySpottedDevoutlySarcasticUnknottedReclaimShowoffSuddenDawdlerRejoinZoningSeventyProvenAerosolCohesiveEmblazeAstrideHutPerfectlyThemeUnabashedSpiderQuarryOnionPangBarretteBoatDirectiveSwooshUpcomingTattle",
+        "headers": {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.3"
+        }
+      }
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "direct",
+      "tag": "direct-fragment",
+      "tls_fragment": {
+        "enabled": true,
+        "size": "10-30",
+        "sleep": "2-8"
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "bypass"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": "tun-in",
+        "package_name": "app.hiddify.com",
+        "outbound": "bypass"
+      },
+      {
+        "inbound": "dns-in",
+        "outbound": "dns-out"
+      },
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "domain_suffix": ".ir",
+        "outbound": "direct"
+      },
+      {
+        "rule_set": [
+          "geoip-ir",
+          "geosite-ir"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs",
+        "update_interval": "120h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-ir",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs",
+        "update_interval": "120h0m0s"
+      }
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "override_android_vpn": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "path": "clash.db"
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:16756",
+      "secret": "N27YA_MfrdHnOn7K"
+    }
+  }
+}
